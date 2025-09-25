@@ -27,8 +27,6 @@ class Book extends Model
         );
     }
 
-
-
     public function scopePopular(
         Builder $query,
         $from = null,
@@ -46,17 +44,6 @@ class Book extends Model
                 "reviews_count",
                 "desc"
             );
-    }
-
-    public function scopeMinReviews(
-        Builder $query,
-        int $minReviews
-    ): Builder|QueryBuilder {
-        return $query->having(
-            'reviews_count',
-            '>=',
-            $minReviews
-        );
     }
 
     public function scopeHighestRated(
@@ -77,6 +64,17 @@ class Book extends Model
                 "reviews_avg_rating",
                 "desc"
             );
+    }
+
+    public function scopeMinReviews(
+        Builder $query,
+        int $minReviews
+    ): Builder|QueryBuilder {
+        return $query->having(
+            'reviews_count',
+            '>=',
+            $minReviews
+        );
     }
 
     private function dateRangeFilter(
